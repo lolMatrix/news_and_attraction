@@ -1,2 +1,2 @@
 [MASTER]
-ignore=env/
+ignore=/env/*
