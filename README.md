@@ -6,4 +6,5 @@
 - django
 - mongodb
 - pyspark
+- threading
 - остальное в процессе будет добавляться 
