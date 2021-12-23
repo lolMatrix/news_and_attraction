@@ -7,16 +7,22 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.utils import json
 
-client = MongoClient('localhost', 27017)
+from web import api
+
+config = api.get_database_config()
+client = MongoClient(config['host'], config['port'])
+
+db = config['db_name']
+collection = config['collection']
 
 @api_view(['GET'])
 def get_all_news(request):
-    news_list = client['newses']['news'].find({})
+    news_list = client[db][collection].find({})
     return Response(json.loads(json_util.dumps(list(news_list))))
 
 @api_view(['POST'])
 def save_news(request):
-    client['newses']['news'].insert_one(dict(request.data))
+    client[db][collection].insert_one(dict(request.data))
     return Response({"status": "ok"})
 
 @api_view(['PUT'])
@@ -25,5 +31,5 @@ def update_news(request):
     filter = {
         "link": update['link']
     }
-    client['newses']['news'].update_one(filter, {'$set': update})
+    client[db][collection].update_one(filter, {'$set': update})
     return Response({})

@@ -1,0 +1,6 @@
+{
+    "db_name": "newses",
+    "collection": "news",
+    "host": "localhost",
+    "port": 27017
+}
