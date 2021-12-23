@@ -1,4 +1,7 @@
-from crauler.HtmlParser import HtmlParser
+#!/usr/bin/env python
+import time
+
+from .crauler.HtmlParser import HtmlParser
 from weblib import mongo_api
 
 parser = HtmlParser("http://www.volgograd.ru/news")
@@ -28,5 +31,7 @@ def is_equil_news(newslist, curr):
     return False
 
 
-while True:
-    run()
+def start():
+    while True:
+        run()
+        time.sleep(10.)

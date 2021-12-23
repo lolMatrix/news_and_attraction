@@ -1,4 +1,4 @@
-# http://www.volgograd.ru/
+#!/usr/bin/env python
 import requests as requests
 from bs4 import BeautifulSoup
 import lxml

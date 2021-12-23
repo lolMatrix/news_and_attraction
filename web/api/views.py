@@ -18,3 +18,12 @@ def get_all_news(request):
 def save_news(request):
     client['newses']['news'].insert_one(dict(request.data))
     return Response({"status": "ok"})
+
+@api_view(['PUT'])
+def update_news(request):
+    update = dict(request.data)
+    filter = {
+        "link": update['link']
+    }
+    client['newses']['news'].update_one(filter, {'$set': update})
+    return Response({})
