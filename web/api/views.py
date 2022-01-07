@@ -2,6 +2,7 @@ from bson import json_util
 from django.shortcuts import render
 
 # Create your views here.
+from django.template import loader
 from pymongo import MongoClient
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -17,7 +18,7 @@ collection = config['collection']
 
 @api_view(['GET'])
 def get_all_news(request):
-    news_list = client[db][collection].find({})
+    news_list = client[db][collection].find({}).sort("_id", -1)
     return Response(json.loads(json_util.dumps(list(news_list))))
 
 @api_view(['POST'])
@@ -33,3 +34,6 @@ def update_news(request):
     }
     client[db][collection].update_one(filter, {'$set': update})
     return Response({})
+
+def get_news_html(request):
+    return render(request, "index.html")

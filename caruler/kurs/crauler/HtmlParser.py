@@ -26,7 +26,11 @@ class HtmlParser:
 
     def get_news(self, news):
         url = self.path.split('/news')[0] + news.h2.a['href']
-        text = news.h2.a.text
+        text = news.select_one('.desc')
+        if text.p is not None:
+            text = text.p.text
+        else:
+            text = text.text
 
         text += self.get_full_text(url)
 
