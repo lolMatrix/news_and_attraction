@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
-from threading import Thread
-
-from caruler.kurs import spider
-
 
 def runserver():
     """Run administrative tasks."""
@@ -18,7 +14,5 @@ def runserver():
             "forget to activate a virtual environment?"
         ) from exc
 
-    thread = Thread(target=spider.start)
-    thread.start()
 
     execute_from_command_line(["", "runserver"])

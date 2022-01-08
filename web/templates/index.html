@@ -18,17 +18,32 @@
 
 </div>
 
+<div class="container" id="pages"></div>
+
 <script>
-    $.getJSON('/news/', function (data) {
-        console.log(data)
-        data.forEach(x => {
-            $("#list").append("<div class=\"row text-center\">\n" +
-                `        <a href="${x.link}">${x.title}</a>\n` +
-                `        <p>${x.text}</p>\n` +
-                `        <p>${x.date}</p>\n` +
-                "    </div>")
+    $(document).ready(function () {
+        getPage(1)
+        $.getJSON("/news/count/", function (data) {
+            let count = data.count;
+            for (let i = 1; i < count; i++){
+                $("#pages").append(`<a href="#" onclick="getPage(${i})">${i} </a>`)
+            }
         })
     })
+    function getPage(page) {
+        $.getJSON(`/news/page/${page}/`, function (data) {
+            $("#list").html("")
+            data.forEach(x => {
+                $("#list").append("<div class=\"row\">\n" +
+                    `        <a class='text-center' href="${x.link}">${x.title}</a>\n` +
+                    `        <p class='text-capitalize'>${x.text}</p>\n` +
+                    `        <p class='text-right'>${x.date}</p>\n` +
+                    "    </div>")
+            })
+        })
+    }
+
+
 </script>
 </body>
 </html>

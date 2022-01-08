@@ -8,8 +8,9 @@ class HtmlParser:
     def __init__(self, path):
         self.path = path
 
-    def parseFirstPage(self):
-        soup = self.gethtml(self.path)
+    def parse_page(self, page_number: int):
+        newses_path = self.path + f"?PAGEN_1={page_number}"
+        soup = self.get_html(newses_path)
         newses = soup.find_all("div", attrs={"class": "news-item"})
 
         news_list = []
@@ -19,13 +20,16 @@ class HtmlParser:
 
         return news_list
 
-    def gethtml(self, url):
+    def get_html(self, url):
         text = requests.get(url).text
         soup = BeautifulSoup(text, 'lxml')
         return soup
 
     def get_news(self, news):
         url = self.path.split('/news')[0] + news.h2.a['href']
+        if isinstance(url, list):
+            url = url[0]
+
         text = news.select_one('.desc')
         if text.p is not None:
             text = text.p.text
@@ -43,12 +47,13 @@ class HtmlParser:
         return result
 
     def get_full_text(self, url):
-        soup = self.gethtml(url)
+        soup = self.get_html(url)
         text = soup.select_one("#full_text")
 
         full_text = ""
-        paragraphs = text.find_all("p")
-        for paragraph in paragraphs:
-            full_text += paragraph.text
+        if text is not None:
+            paragraphs = text.find_all("p")
+            for paragraph in paragraphs:
+                full_text += paragraph.text
 
         return full_text
