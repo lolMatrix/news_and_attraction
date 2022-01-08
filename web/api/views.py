@@ -26,8 +26,12 @@ def get_all_news(request):
 @api_view(['POST'])
 def save_news(request):
     req = dict(request.data)
-    if client[db][collection].find(req).count_documents() < 1:
-        client[db][collection].insert_one(req)
+    try:
+        if client[db][collection].find(req).count_documents() < 1:
+            client[db][collection].insert_one(req)
+    except Exception as e:
+        print(req)
+        print("произошли шоколадки " + e)
     return Response({"status": "ok"})
 
 
