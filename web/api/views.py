@@ -27,7 +27,7 @@ def get_all_news(request):
 def save_news(request):
     try:
         req = dict(request.data)
-        if client[db][collection].find(req).count_documents() < 1:
+        if client[db][collection].count_documents(req) < 1:
             client[db][collection].insert_one(req)
     except Exception as e:
         print(request.data)
