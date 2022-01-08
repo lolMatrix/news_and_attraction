@@ -31,7 +31,7 @@ def save_news(request):
             client[db][collection].insert_one(req)
     except Exception as e:
         print(request.data)
-        print("произошли шоколадки " + e)
+        print(f"произошли шоколадки {e}")
     return Response({"status": "ok"})
 
 
