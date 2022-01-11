@@ -1,7 +1,7 @@
 ﻿#encoding "utf-8"
 
-Person -> AnyWord<kwtype=politicians>;
-Object -> AnyWord<kwtype=objects>;
+Person -> Word<kwtype=politicians>;
+Object -> Word<kwtype=objects>;
 
 Fact -> Person interp (Fact.Politician);
 Fact -> Object interp (Fact.Attraction);

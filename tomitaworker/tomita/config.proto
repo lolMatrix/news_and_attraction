@@ -1,15 +1,15 @@
 encoding "utf8";
 
 TTextMinerConfig {
-	Dictionary = "dic.gzt";
-	PrettyOutput = "pretty.html";
+	Dictionary = "tomitaworker/tomita/dic.gzt";
+	PrettyOutput = "tomitaworker/tomita/pretty.html";
 	
 	Input = {
-		File = "input.txt";
+		File = "tomitaworker/tomita/input.txt";
 	}
 
 	Output = {
-		File = "output.txt";
+		File = "tomitaworker/tomita/output.txt";
 		Format = text;
 	}
 

@@ -1,4 +1,4 @@
-from bson import json_util
+from bson import json_util, ObjectId
 from django.shortcuts import render
 
 # Create your views here.
@@ -37,11 +37,13 @@ def save_news(request):
 
 @api_view(['PUT'])
 def update_news(request):
+    print(request.data)
     update = dict(request.data)
     filter = {
-        "link": update['link']
+        '_id': ObjectId(update['_id']['$oid'])
     }
-    client[db][collection].update_one(filter, {'$set': update})
+    update.pop("_id", None)
+    client[db][collection].update_one(filter, {'$set': update}, upsert=False)
     return Response({})
 
 
