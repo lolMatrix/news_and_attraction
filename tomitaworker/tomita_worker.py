@@ -40,8 +40,6 @@ def run():
                 news["tomita"].append({"Attraction": j})
 
             mongo_api.update_news(news)
-            politician.clear()
-            attraction.clear()
 
 
 def start_tomita():
@@ -50,4 +48,4 @@ def start_tomita():
             run()
         except Exception as e:
             print(f"Ашибка {e}")
-        time.sleep(1)
+        time.sleep(60)
