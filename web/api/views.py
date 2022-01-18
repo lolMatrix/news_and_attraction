@@ -1,4 +1,4 @@
-from bson import json_util
+from bson import json_util, ObjectId
 from django.shortcuts import render
 
 # Create your views here.
@@ -30,7 +30,6 @@ def save_news(request):
         if client[db][collection].count_documents(req) < 1:
             client[db][collection].insert_one(req)
     except Exception as e:
-        print(request.data)
         print(f"произошли шоколадки {e}")
     return Response({"status": "ok"})
 
@@ -39,9 +38,10 @@ def save_news(request):
 def update_news(request):
     update = dict(request.data)
     filter = {
-        "link": update['link']
+        '_id': ObjectId(update['_id']['$oid'])
     }
-    client[db][collection].update_one(filter, {'$set': update})
+    update.pop("_id", None)
+    client[db][collection].update_one(filter, {'$set': update}, upsert=False)
     return Response({})
 
 
