@@ -2,5 +2,6 @@
     "db_name": "newses",
     "collection": "news",
     "host": "localhost",
-    "port": 27017
+    "port": 27017,
+    "sleepTime": 180
 }
