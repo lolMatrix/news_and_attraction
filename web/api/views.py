@@ -30,14 +30,12 @@ def save_news(request):
         if client[db][collection].count_documents(req) < 1:
             client[db][collection].insert_one(req)
     except Exception as e:
-        print(request.data)
         print(f"произошли шоколадки {e}")
     return Response({"status": "ok"})
 
 
 @api_view(['PUT'])
 def update_news(request):
-    print(request.data)
     update = dict(request.data)
     filter = {
         '_id': ObjectId(update['_id']['$oid'])
