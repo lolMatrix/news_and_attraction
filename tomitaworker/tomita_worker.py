@@ -1,8 +1,10 @@
 import os
 import time
 
+from tomitaworker import get_database_config
 from weblib import mongo_api
 
+config = get_database_config()
 
 def run():
     collection = mongo_api.get_news_list()
@@ -48,4 +50,4 @@ def start_tomita():
             run()
         except Exception as e:
             print(f"Ашибка {e}")
-        time.sleep(60)
+        time.sleep(config["sleepTime"])
