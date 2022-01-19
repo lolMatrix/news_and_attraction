@@ -21,8 +21,6 @@
 Необходимо перед началом настройки проекта, настроить базу данных mongodb. После настройки скачать проект: 
 1. git clone https://github.com/lolMatrix/news_and_attraction.git 
 2. cd news_and_attraction
-В проекте используется python 3-ей версии. Устанавливаем из репозитория Ubuntu: 
-2. cd news_and_attraction
 3. sudo apt update
 4. sudo apt install python3 && sudo apt install python3-pip
 5. sudo apt install --assume-yes p7zip-full
