@@ -30,7 +30,7 @@
 10. pip3 install virtualenv
 11. python3 -m virtualenv venv
 12. source venv/bin/activate
-13. pip install –r requirements.txt
+13. pip install -r requirements.txt
 14. python main.py
 
 Сервер django автоматически запускается вместе с краулером
