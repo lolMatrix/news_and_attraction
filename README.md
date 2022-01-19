@@ -23,7 +23,7 @@
 2. cd news_and_attraction
 3. sudo apt update
 4. sudo apt install python3 -y && sudo apt install python3-pip -y
-6. sudo apt install --assume-yes p7zip-full
+6. sudo apt install --assume-yes p7zip-full -y
 7. 7z x tomitaworker/tomita/tomita-parser.7z
 8. mv tomita-parser tomitaworker/tomita
 9. chmod +x tomitaworker/tomita/tomita-parser
