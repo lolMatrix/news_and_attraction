@@ -8,6 +8,7 @@ from nltk import FreqDist, classify, NaiveBayesClassifier
 nltk.download('stopwords')
 nltk.download('twitter_samples')
 nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
 from nltk.corpus import twitter_samples, stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.tag import pos_tag
