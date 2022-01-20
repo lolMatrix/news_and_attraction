@@ -25,11 +25,12 @@
         getPage(1)
         $.getJSON("/news/count/", function (data) {
             let count = data.count;
-            for (let i = 1; i < count; i++){
+            for (let i = 1; i < count; i++) {
                 $("#pages").append(`<a href="#" onclick="getPage(${i})">${i} </a>`)
             }
         })
     })
+
     function getPage(page) {
         $.getJSON(`/news/page/${page}/`, function (data) {
             $("#list").html("")
@@ -43,8 +44,8 @@
                     view += "<h4>Люди и достопримечательности в статье:</h4><ul>";
                     var personsList = [];
                     x.tomita.forEach(y => {
-                        if (!personsList.includes(y)) {
-                            var obj = y.Person !== null ? y.Person : y.Attraction;
+                        var obj = y.Person !== null ? y.Person : y.Attraction;
+                        if (!personsList.includes(obj)) {
                             if (obj !== undefined) {
                                 personsList.push(obj);
                                 view += `<li>${obj}</li>`;
