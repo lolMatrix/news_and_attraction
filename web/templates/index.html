@@ -34,10 +34,28 @@
         $.getJSON(`/news/page/${page}/`, function (data) {
             $("#list").html("")
             data.forEach(x => {
-                $("#list").append("<div class=\"row\">\n" +
+                var view = "<div class=\"row\">\n" +
                     `        <a class='text-center' href="${x.link}">${x.title}</a>\n` +
                     `        <p class='text-capitalize'>${x.text}</p>\n` +
-                    `        <p class='text-right'>${x.date}</p>\n` +
+                    `        <p class='text-right'>${x.date}</p>\n`;
+
+                if (x.tomita !== null) {
+                    view += "<h4>Люди и достопримечательности в статье:</h4><ul>";
+                    var personsList = [];
+                    x.tomita.forEach(y => {
+                        if (!personsList.includes(y)) {
+                            personsList.push(y);
+                            view += `<li>${y.Person !== null ? y.Person : y.Attraction}</li>`;
+                        }
+                    })
+                    view += "</ul>"
+                }
+
+                if (x.rate !== null) {
+                    view += `<h5>Статья имеет ${x.rate === "Positive" ? "положительный" : "отрицательный"} окрас</h5>`
+                }
+
+                $("#list").append(view +
                     "    </div>")
             })
         })
