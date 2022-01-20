@@ -44,8 +44,11 @@
                     var personsList = [];
                     x.tomita.forEach(y => {
                         if (!personsList.includes(y)) {
-                            personsList.push(y);
-                            view += `<li>${y.Person !== null ? y.Person : y.Attraction}</li>`;
+                            var obj = y.Person !== null ? y.Person : y.Attraction;
+                            if (obj !== undefined) {
+                                personsList.push(obj);
+                                view += `<li>${obj}</li>`;
+                            }
                         }
                     })
                     view += "</ul>"
