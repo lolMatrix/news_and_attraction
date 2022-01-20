@@ -13,6 +13,7 @@ from tomitaworker import get_database_config
 from weblib import mongo_api
 
 config = get_database_config()
+classifier = None
 
 
 def remove_noise(tweet_tokens, stop_words=()):
@@ -78,19 +79,21 @@ def init():
 
     train_data = dataset[:7000]
 
+    global classifier
     classifier = NaiveBayesClassifier.train(train_data)
 
 
 def run():
-    # Оценка предложений из БД
-    collection = mongo_api.get_news_list()
+    if classifier is not None:
+        # Оценка предложений из БД
+        collection = mongo_api.get_news_list()
 
-    for news in collection:
-        if "tomita" in news:
-            tweet = news["text"]
-            custom_tokens = remove_noise(word_tokenize(tweet))
-            news["rate"] = classifier.classify(dict([token, True] for token in custom_tokens))
-            mongo_api.update_news(news)
+        for news in collection:
+            if "tomita" in news:
+                tweet = news["text"]
+                custom_tokens = remove_noise(word_tokenize(tweet))
+                news["rate"] = classifier.classify(dict([token, True] for token in custom_tokens))
+                mongo_api.update_news(news)
 
 def start_rating():
     init()
