@@ -13,7 +13,7 @@ def run():
     for news in collection:
         if "tomita" not in news:
             with open("tomitaworker/tomita/input.txt", "w") as file:
-                file.write(news['text'])
+                file.write(news['title'] + news['text'])
 
             os.system("./tomitaworker/tomita/tomita-parser ./tomitaworker/tomita/config.proto")
             politician = []
