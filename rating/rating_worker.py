@@ -3,7 +3,9 @@ import re
 import string
 import time
 
+import nltk
 from nltk import FreqDist, classify, NaiveBayesClassifier
+nltk.download('stopwords')
 from nltk.corpus import twitter_samples, stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.tag import pos_tag
