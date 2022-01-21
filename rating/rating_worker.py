@@ -13,6 +13,7 @@ nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
 nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger_ru')
 
 from nltk.corpus import twitter_samples, stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -59,7 +60,7 @@ def get_tweets_for_model(cleaned_tokens_list):
         yield dict([token, True] for token in tweet_tokens)
 
 def init():
-    stop_words = stopwords.words('english')
+    stop_words = stopwords.words('russian')
 
     positive_tweet_tokens = twitter_samples.tokenized('positive_tweets.json')
     negative_tweet_tokens = twitter_samples.tokenized('negative_tweets.json')
