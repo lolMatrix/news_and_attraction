@@ -42,8 +42,8 @@
 
                 if (x.tomita !== null) {
                     var personsList = [];
+                    view += "<h4>Люди и достопримечательности в статье:</h4><ul>";
                     x.tomita.forEach(y => {
-                        view += "<h4>Люди и достопримечательности в статье:</h4><ul>";
                         var obj = y.Person !== null ? y.Person : y.Attraction;
                         if (!personsList.includes(obj)) {
                             if (obj !== undefined) {
