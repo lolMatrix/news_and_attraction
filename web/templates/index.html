@@ -40,14 +40,23 @@
                     `        <p class='text-capitalize'>${x.text}</p>\n` +
                     `        <p class='text-right'>${x.date}</p>\n`;
 
-                if (x.tomita !== null) {
-                    view += "<h4>Люди и достопримечательности в статье:</h4><ul>";
+                if (x.tomita !== undefined) {
                     var personsList = [];
+                    view += "<h4>Люди и достопримечательности в статье:</h4><ul>";
                     x.tomita.forEach(y => {
-                        var obj = y.Person !== null ? y.Person : y.Attraction;
+                        var obj = y.Person !== undefined ? y.Person : y.Attraction;
                         if (!personsList.includes(obj)) {
                             if (obj !== undefined) {
                                 personsList.push(obj);
+                                var rate;
+                                if (y.object_rate === "Positive") {
+                                    rate = "положительно";
+                                } else if (y.object_rate === "Negative"){
+                                    rate = "отрицательно";
+                                }
+                                if (rate !== undefined)
+                                    obj += `. Предположительно оценивают ${rate}`;
+
                                 view += `<li>${obj}</li>`;
                             }
                         }

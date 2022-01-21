@@ -103,6 +103,15 @@ def run():
                 tweet = news["text"]
                 custom_tokens = remove_noise(word_tokenize(tweet))
                 news["rate"] = classifier.classify(dict([token, True] for token in custom_tokens))
+
+                object_list = news["tomita"]
+
+                for i in range(len(object_list)):
+                    if "Sentence" in object_list[i]:
+                        tweet = object_list[i]["Sentence"]
+                        custom_tokens = remove_noise(word_tokenize(tweet))
+                        object_list[i]["object_rate"] = classifier.classify(dict([token, True] for token in custom_tokens))
+
                 mongo_api.update_news(news)
 
 def start_rating():
