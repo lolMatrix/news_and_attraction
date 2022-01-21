@@ -25,19 +25,41 @@
         getPage(1)
         $.getJSON("/news/count/", function (data) {
             let count = data.count;
-            for (let i = 1; i < count; i++){
+            for (let i = 1; i < count; i++) {
                 $("#pages").append(`<a href="#" onclick="getPage(${i})">${i} </a>`)
             }
         })
     })
+
     function getPage(page) {
         $.getJSON(`/news/page/${page}/`, function (data) {
             $("#list").html("")
             data.forEach(x => {
-                $("#list").append("<div class=\"row\">\n" +
+                var view = "<div class=\"row\">\n" +
                     `        <a class='text-center' href="${x.link}">${x.title}</a>\n` +
                     `        <p class='text-capitalize'>${x.text}</p>\n` +
-                    `        <p class='text-right'>${x.date}</p>\n` +
+                    `        <p class='text-right'>${x.date}</p>\n`;
+
+                if (x.tomita !== null) {
+                    view += "<h4>Люди и достопримечательности в статье:</h4><ul>";
+                    var personsList = [];
+                    x.tomita.forEach(y => {
+                        var obj = y.Person !== null ? y.Person : y.Attraction;
+                        if (!personsList.includes(obj)) {
+                            if (obj !== undefined) {
+                                personsList.push(obj);
+                                view += `<li>${obj}</li>`;
+                            }
+                        }
+                    })
+                    view += "</ul>"
+                }
+
+                if (x.rate !== null) {
+                    view += `<h5>Статья имеет ${x.rate === "Positive" ? "положительный" : "отрицательный"} окрас</h5>`
+                }
+
+                $("#list").append(view +
                     "    </div>")
             })
         })

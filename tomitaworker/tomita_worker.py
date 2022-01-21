@@ -6,16 +6,16 @@ from weblib import mongo_api
 
 config = get_database_config()
 
+
 def run():
     collection = mongo_api.get_news_list()
     print("Новости получены")
     for news in collection:
         if "tomita" not in news:
             with open("tomitaworker/tomita/input.txt", "w") as file:
-                file.write(news['text'])
+                file.write(news['title'] + news['text'])
 
             os.system("./tomitaworker/tomita/tomita-parser ./tomitaworker/tomita/config.proto")
-
             politician = []
             attraction = []
 
@@ -42,6 +42,9 @@ def run():
                 news["tomita"].append({"Attraction": j})
 
             mongo_api.update_news(news)
+
+            politician.clear()
+            attraction.clear()
 
 
 def start_tomita():
