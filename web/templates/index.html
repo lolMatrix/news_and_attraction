@@ -48,7 +48,7 @@
                         if (!personsList.includes(obj)) {
                             if (obj !== undefined) {
                                 personsList.push(obj);
-                                if (y.Sentence !== null && y.object_rate !== null){
+                                if (y.Sentence !== null && y.object_rate !== null && y.Sentence !== undefined && y.object_rate !== undefined){
                                     obj += `. В предложении ${y.Sentence} предположительно оценивают ${y.object_rate === "Positive" ? "положительно" : "отрицательно"}`
                                 }
                                 view += `<li>${obj}</li>`;
