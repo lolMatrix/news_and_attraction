@@ -1,11 +1,13 @@
+#!/usr/bin/env python
 from pyspark.sql import SparkSession
 from pyspark.ml.feature import Tokenizer
 from pyspark.ml.feature import StopWordsRemover
 from pyspark.ml.feature import CountVectorizer
 from pyspark.ml.feature import IDF
 from pyspark.ml.feature import Word2Vec
-from weblib import mongo_api
 import re
+
+from weblib import mongo_api
 
 spark = SparkSession\
     .builder\
