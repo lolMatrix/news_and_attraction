@@ -8,4 +8,4 @@ def get_database_config() -> dict:
         return json.loads(file)
 
 
-url = get_database_config()['server_url']
+url = get_database_config()['core_service_url']
