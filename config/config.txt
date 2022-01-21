@@ -3,5 +3,6 @@
     "collection": "news",
     "host": "localhost",
     "port": 27017,
-    "sleepTime": 180
+    "sleepTime": 180,
+    "core_service_url": "http://localhost:8000"
 }
