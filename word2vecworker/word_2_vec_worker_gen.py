@@ -7,7 +7,7 @@ from pyspark.ml.feature import IDF
 from pyspark.ml.feature import Word2Vec
 import re
 
-from weblib import mongo_api
+from ..weblib import mongo_api
 
 spark = SparkSession\
     .builder\
