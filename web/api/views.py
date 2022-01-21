@@ -54,7 +54,7 @@ def get_news_page(request, page: int):
     if page == 0:
         page = 1
 
-    news_list = client[db][collection].find({}).sort("_id", -1).limit(10).skip(10 * page)
+    news_list = client[db][collection].sort("_id", -1).limit(10).skip(10 * page).find({})
     return Response(json.loads(json_util.dumps(list(news_list))))
 
 
