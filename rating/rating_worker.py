@@ -5,18 +5,21 @@ import time
 
 import nltk
 from nltk import FreqDist, classify, NaiveBayesClassifier
+from rating import get_database_config
+
 nltk.download('stopwords')
 nltk.download('twitter_samples')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
 nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger_ru')
+
 from nltk.corpus import twitter_samples, stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 
-from tomitaworker import get_database_config
 from weblib import mongo_api
 
 config = get_database_config()
@@ -57,7 +60,7 @@ def get_tweets_for_model(cleaned_tokens_list):
         yield dict([token, True] for token in tweet_tokens)
 
 def init():
-    stop_words = stopwords.words('english')
+    stop_words = stopwords.words('russian')
 
     positive_tweet_tokens = twitter_samples.tokenized('positive_tweets.json')
     negative_tweet_tokens = twitter_samples.tokenized('negative_tweets.json')

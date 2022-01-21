@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from pyspark.sql import SparkSession
 from pyspark.ml.feature import Word2VecModel
 

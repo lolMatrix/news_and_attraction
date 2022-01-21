@@ -1,11 +1,13 @@
+#!/usr/bin/env python
 from pyspark.sql import SparkSession
 from pyspark.ml.feature import Tokenizer
 from pyspark.ml.feature import StopWordsRemover
 from pyspark.ml.feature import CountVectorizer
 from pyspark.ml.feature import IDF
 from pyspark.ml.feature import Word2Vec
-from weblib import mongo_api
 import re
+
+from weblib import mongo_api
 
 spark = SparkSession\
     .builder\
@@ -17,7 +19,7 @@ collection = mongo_api.get_news_list()
 
 with open("news.txt", "w", encoding="utf-8") as file:
     for news in collection:
-        content = news["text"]
+        content = str(news["text"])
         content = re.sub(r'[^\w\s]+|[\d]+', r' ', content).strip()
         file.write(content + "\n")
 
