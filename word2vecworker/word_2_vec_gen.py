@@ -4,8 +4,11 @@ from pyspark.ml.feature import StopWordsRemover
 from pyspark.ml.feature import CountVectorizer
 from pyspark.ml.feature import IDF
 from pyspark.ml.feature import Word2Vec
-from weblib import mongo_api
+import sys
+import os
 import re
+sys.path.insert(1, os.path.join(sys.path[0],'..'))
+from weblib import mongo_api
 
 spark = SparkSession\
     .builder\
@@ -14,12 +17,16 @@ spark = SparkSession\
 
 # Подготовка данных
 collection = mongo_api.get_news_list()
+counter = 0
 
 with open("news.txt", "w", encoding="utf-8") as file:
     for news in collection:
+        counter += 1
         content = news["text"]
         content = re.sub(r'[^\w\s]+|[\d]+', r' ', content).strip()
         file.write(content + "\n")
+        if counter == 16000:
+            break
 
 # Построчная загрузка файла в RDD
 input_file = spark.sparkContext.textFile('news.txt')

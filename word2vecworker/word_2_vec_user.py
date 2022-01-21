@@ -9,7 +9,7 @@ spark = SparkSession \
     .getOrCreate()
 
 model = Word2VecModel.load(MODEL_PATH)
-count = 10
+count = 5
 
 while(True):
     try:
