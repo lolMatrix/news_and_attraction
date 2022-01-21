@@ -15,4 +15,4 @@ def runserver():
         ) from exc
 
 
-    execute_from_command_line(["", "runserver"])
+    execute_from_command_line(["", "runserver", "0.0.0.0:8000"])

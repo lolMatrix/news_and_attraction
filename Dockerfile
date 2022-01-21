@@ -1,5 +1,7 @@
 FROM python:3
 
+EXPOSE 8000/tcp
+
 COPY . .
 
 RUN apt update
