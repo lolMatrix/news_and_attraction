@@ -19,7 +19,7 @@ collection = mongo_api.get_news_list()
 
 with open("news.txt", "w", encoding="utf-8") as file:
     for news in collection:
-        content = news["text"]
+        content = str(news["text"])
         content = re.sub(r'[^\w\s]+|[\d]+', r' ', content).strip()
         file.write(content + "\n")
 
