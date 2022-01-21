@@ -48,9 +48,14 @@
                         if (!personsList.includes(obj)) {
                             if (obj !== undefined) {
                                 personsList.push(obj);
-                                if (y.object_rate !== null){
-                                    obj += `. Предположительно оценивают ${y.object_rate === "Positive" ? "положительно" : "отрицательно"}`
+                                var rate;
+                                if (y.object_rate === "Positive") {
+                                    rate = "положительно";
+                                } else if (y.object_rate === "Negative"){
+                                    rate = "отрицательно";
                                 }
+                                obj += `. Предположительно оценивают ${rate}`
+
                                 view += `<li>${obj}</li>`;
                             }
                         }
