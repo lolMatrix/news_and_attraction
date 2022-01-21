@@ -16,7 +16,6 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 
-from tomitaworker import get_database_config
 from weblib import mongo_api
 
 config = get_database_config()
